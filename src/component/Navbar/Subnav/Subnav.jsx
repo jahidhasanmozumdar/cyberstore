@@ -2,7 +2,7 @@ import { HiArrowsRightLeft } from "react-icons/hi2";
 import { BiUser } from "react-icons/Bi";
 import { GiSelfLove } from "react-icons/Gi";
 
-function Subnav() {
+function SubNav() {
   return (
     <div className="min-h-[41px] bg-[#253237] justify-around items-center  hidden sm:flex">
       <div className="flex justify-center items-center min-h-[21px]">
@@ -41,4 +41,4 @@ function Subnav() {
   );
 }
 
-export default Subnav;
+export default SubNav;

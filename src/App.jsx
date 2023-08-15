@@ -1,10 +1,12 @@
 import "./App.css";
-import Subnav from "./component/Navbar/Subnav/Subnav";
+import MainNav from "./component/Navbar/Subnav/MainNav/MainNav";
+import SubNav from "./component/Navbar/Subnav/Subnav";
 
 function App() {
   return (
     <>
-      <Subnav></Subnav>
+      <SubNav></SubNav>
+      <MainNav></MainNav>
     </>
   );
 }
