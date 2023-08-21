@@ -6,7 +6,12 @@ const MainNav = () => {
     <div className="min-h-[106px] flex flex-col justify-around items-center md:flex-row lg:flex-row">
       <div className="flex flex-col items-center gap-[10px] md:gap-[35px] lg:gap-[100px] md:flex-row lg:flex-row">
         <div>
-          <h2 className="text-[#253237] text-[34px] font-extrabold">EcoLife</h2>
+          <h2 className="text-[#253237] text-[34px] font-extrabold">
+            <img
+              src="https://ecolife.posthemes.com/demo1/img/logo-1638512648.jpg"
+              alt="ecolife"
+            />
+          </h2>
         </div>
         <div>
           <ul className="flex items-center gap-[35px] flex-col md:flex-row lg:flex-row">
