@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { BsDot } from "react-icons/Bs";
 
 const Banner = () => {
   let slider = [
