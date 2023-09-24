@@ -1,81 +1,92 @@
 import { useState } from "react";
+import { BsArrowLeftCircleFill, BsArrowRightCircleFill } from "react-icons/bs";
 
 const Banner = () => {
-  let slider = [
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const images = [
     {
-      URL: "https://ecolife.posthemes.com/demo1/img/cms/s1_1.jpg",
+      src: "https://cyberstore.qodeinteractive.com/wp-content/uploads/2017/08/h4-slide-1-img-1.png",
+      caption: "Headphones- 30% off",
     },
     {
-      URL: "https://ecolife.posthemes.com/demo1/img/cms/s2_1.jpg",
+      src: "https://cyberstore.qodeinteractive.com/wp-content/uploads/2017/08/h4-slide-2-img-1.png",
+      caption: "Headphones- 30% off",
+    },
+    {
+      src: "https://cyberstore.qodeinteractive.com/wp-content/uploads/2017/08/h4-slide-3-img-1.jpg",
+      caption: "Caption 3",
     },
   ];
-
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const prev = () => {
-    const isFirstSlide = currentIndex === 0;
-    const newIndex = isFirstSlide ? slider.length - 1 : currentIndex - 1;
-    setCurrentIndex(newIndex);
-    console.log(currentIndex - 1);
-  };
-  const next = () => {
-    const isLastSlide = currentIndex === slider.length - 1;
-    const newIndex = isLastSlide ? 0 : currentIndex + 1;
-    setCurrentIndex(newIndex);
-    console.log(newIndex);
+  const nextSlide = () => {
+    setCurrentSlide((currentSlide + 1) % images.length);
   };
 
-  const dotSliding = (slideIndex) => {
-    setCurrentIndex(slideIndex);
+  // Function to go to the previous slide
+  const prevSlide = () => {
+    setCurrentSlide((currentSlide - 1 + images.length) % images.length);
   };
+
   return (
-    <div
-      style={{ backgroundImage: `url(${slider[currentIndex].URL})` }}
-      className="min-h-[660px] w-full  relative bg-cover bg-center"
-    >
-      <div className="w-full h-full">
-        <div className="absolute left-52 top-[150px]">
-          <p className="text-[18px] uppercase text-[#253237] mb-[15px]">
-            not fried not baked
+    // <div
+    //   style={{ backgroundColor: "#8a8e92" }}
+    //   className="min-h-[660px] w-full  relative bg-cover bg-center lg:min-w-[1100px] lg:max-w-[1100px] mx-auto"
+    // >
+    //   <div className="w-full h-full sm:w-1/2 lg:w-1/3">
+    //     <div className="absolute left-52 top-[150px]">
+    //       <p className="text-[18px] uppercase text-[#253237] mb-[15px]">
+    //         not fried not baked
+    //       </p>
+    //     </div>
+    //     <div className="absolute flex justify-between items-center transform -translate-y-1/2 left-1 right-1 top-1/2">
+    //       <button
+    //         onClick={prev}
+    //         className="h-[50px] w-[50px] rounded-full bg-white hover:bg-[#4FB68D]"
+    //       >
+    //         ❮
+    //       </button>
+    //       <button
+    //         onClick={next}
+    //         className="h-[50px] w-[50px] rounded-full bg-white hover:bg-[#4FB68D]"
+    //       >
+    //         ❯
+    //       </button>
+    //     </div>
+    //     <div className="absolute flex justify-center items-center bottom-[1px] left-1/2 ">
+    //       {slider?.map((slide, slideIndex) => (
+    //         <div
+    //           key={slideIndex}
+    //           className="text-[90px] cursor-pointer text-[#4FB68D] "
+    //           onClick={() => dotSliding(slideIndex)}
+    //         >
+    //           <h1>.</h1>
+    //         </div>
+    //       ))}
+    //     </div>
+    //   </div>
+    // </div>
+    <div className="min-h-[660px] bg-[#F4F4F4] lg:min-w-[1300px] lg:max-w-[1300px] mx-auto">
+      <div className="relative">
+        <div className=" inset-0 flex items-center justify-center">
+          <p className="text-white text-lg  p-2 rounded">
+            {images[currentSlide].caption}
           </p>
-          <h1 className="text-[48px] font-semibold text-[#253237]">
-            Freeze Dried Fruits
-          </h1>
-          <h1 className="text-[48px] font-semibold text-[#253237]">
-            Pineapple Coconut
-          </h1>
-          <p className="text-[20px] text-[#253237] mb-[70px]">
-            Free Shopping On Qualified Orders $35
-          </p>
-          <button className="bg-[#4FB68D] px-[25px] py-[10px] rounded-md hover:bg-[#253237] font-bold text-white">
-            Shop Now
-          </button>
         </div>
-        <div className="absolute flex justify-between items-center transform -translate-y-1/2 left-1 right-1 top-1/2">
-          <button
-            onClick={prev}
-            className="h-[50px] w-[50px] rounded-full bg-white hover:bg-[#4FB68D]"
-          >
-            ❮
-          </button>
-          <button
-            onClick={next}
-            className="h-[50px] w-[50px] rounded-full bg-white hover:bg-[#4FB68D]"
-          >
-            ❯
-          </button>
+        <div className="min-w-[1138px] h-[347px] absolute left-[150px] top-[320px] overflow-hidden">
+          <img
+            src={images[currentSlide].src}
+            alt={`Slide ${currentSlide + 1}`}
+            className="rounded-lg"
+          />
         </div>
-        <div className="absolute flex justify-center items-center bottom-[1px] left-1/2 ">
-          {slider?.map((slide, slideIndex) => (
-            <div
-              key={slideIndex}
-              className="text-[90px] cursor-pointer text-[#4FB68D] "
-              onClick={() => dotSliding(slideIndex)}
-            >
-              <h1>.</h1>
-            </div>
-          ))}
-        </div>
+      </div>
+      <div className="flex justify-between mt-[220px] px-[10px]">
+        <button onClick={prevSlide} className="text-white text-[50px]">
+          <BsArrowLeftCircleFill></BsArrowLeftCircleFill>
+        </button>
+        <button onClick={nextSlide} className="text-white text-[50px]">
+          <BsArrowRightCircleFill></BsArrowRightCircleFill>
+        </button>
       </div>
     </div>
   );

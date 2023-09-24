@@ -1,16 +1,14 @@
 import "./App.css";
 import Banner from "./component/Banner/Banner";
-import MainNav from "./component/Navbar/Subnav/MainNav/MainNav";
-import SubNav from "./component/Navbar/Subnav/Subnav";
-import SubBanner from "./component/SubBanner/SubBanner";
+import TopNav from "./component/Navbar/TopNav/TopNav";
+import MiddleNav from "./component/Navbar/middleNav/Middlenav";
 
 function App() {
   return (
     <>
-      <SubNav></SubNav>
-      <MainNav></MainNav>
+      <TopNav></TopNav>
+      <MiddleNav></MiddleNav>
       <Banner></Banner>
-      <SubBanner></SubBanner>
     </>
   );
 }
