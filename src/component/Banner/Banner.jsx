@@ -7,15 +7,21 @@ const Banner = () => {
   const images = [
     {
       src: "https://cyberstore.qodeinteractive.com/wp-content/uploads/2017/08/h4-slide-1-img-1.png",
-      caption: "Headphones- 30% off",
+      caption: "MAC BOOK- 30% off",
+      description:
+        "The MacBook is a line of sleek and powerful laptops designed by Apple, known for their premium build quality and high-performance hardware.",
     },
     {
       src: "https://cyberstore.qodeinteractive.com/wp-content/uploads/2017/08/h4-slide-2-img-1.png",
-      caption: "Headphones- 30% off",
+      caption: "iPAD- 30% off",
+      description:
+        "The MacBook is a line of sleek and powerful laptops designed by Apple, known for their premium build quality and high-performance hardware. ",
     },
     {
       src: "https://cyberstore.qodeinteractive.com/wp-content/uploads/2017/08/h4-slide-3-img-1.jpg",
-      caption: "Caption 3",
+      caption: "watch- 30% off",
+      description:
+        "The MacBook is a line of sleek and powerful laptops designed by Apple, known for their premium build quality and high-performance hardware. ",
     },
   ];
   const nextSlide = () => {
@@ -28,63 +34,29 @@ const Banner = () => {
   };
 
   return (
-    // <div
-    //   style={{ backgroundColor: "#8a8e92" }}
-    //   className="min-h-[660px] w-full  relative bg-cover bg-center lg:min-w-[1100px] lg:max-w-[1100px] mx-auto"
-    // >
-    //   <div className="w-full h-full sm:w-1/2 lg:w-1/3">
-    //     <div className="absolute left-52 top-[150px]">
-    //       <p className="text-[18px] uppercase text-[#253237] mb-[15px]">
-    //         not fried not baked
-    //       </p>
-    //     </div>
-    //     <div className="absolute flex justify-between items-center transform -translate-y-1/2 left-1 right-1 top-1/2">
-    //       <button
-    //         onClick={prev}
-    //         className="h-[50px] w-[50px] rounded-full bg-white hover:bg-[#4FB68D]"
-    //       >
-    //         ❮
-    //       </button>
-    //       <button
-    //         onClick={next}
-    //         className="h-[50px] w-[50px] rounded-full bg-white hover:bg-[#4FB68D]"
-    //       >
-    //         ❯
-    //       </button>
-    //     </div>
-    //     <div className="absolute flex justify-center items-center bottom-[1px] left-1/2 ">
-    //       {slider?.map((slide, slideIndex) => (
-    //         <div
-    //           key={slideIndex}
-    //           className="text-[90px] cursor-pointer text-[#4FB68D] "
-    //           onClick={() => dotSliding(slideIndex)}
-    //         >
-    //           <h1>.</h1>
-    //         </div>
-    //       ))}
-    //     </div>
-    //   </div>
-    // </div>
-    <div className="min-h-[660px] bg-[#F4F4F4] lg:min-w-[1300px] lg:max-w-[1300px] mx-auto">
-      <div className="relative">
-        <div className=" inset-0 flex items-center justify-center">
-          <p className="text-white text-lg  p-2 rounded">
+    <div className="max-h-[320px] max-w-[300px] sm:max-h-[320px] sm:max-w-[300px] md:max-h-[500px] md:max-w-[768px]  bg-[#F4F4F4] lg:min-w-[1300px] lg:max-w-[1300px] mx-auto flex flex-col ">
+      <div className=" flex flex-col justify-center items-center md:gap-[100px] px-[20px] py-[10px]">
+        <div className="flex flex-col items-center justify-center gap-[10px]">
+          <p className="text-xl sm:text-xl md:text-[46px] lg:text-6xl">
             {images[currentSlide].caption}
           </p>
+          <p className="text-[10px] sm:text-[10px] md:text-[24px] lg:text-lg md:line-clamp-2">
+            {images[currentSlide].description}
+          </p>
         </div>
-        <div className="min-w-[1138px] h-[347px] absolute left-[150px] top-[320px] overflow-hidden">
+        <div className=" min-w-[24px] min-h-[83px] sm:max-w-[24px] sm:max-h-[83px] md:max-w-[845px] md:max-h-[219px] lg:w-[1138px] lg:h-[347px] overflow-hidden">
           <img
             src={images[currentSlide].src}
             alt={`Slide ${currentSlide + 1}`}
-            className="rounded-lg"
+            className="h-full w-full"
           />
         </div>
       </div>
-      <div className="flex justify-between mt-[220px] px-[10px]">
-        <button onClick={prevSlide} className="text-white text-[50px]">
+      <div className="flex justify-around px-[10px]">
+        <button onClick={prevSlide} className="text-white text-4xl ">
           <BsArrowLeftCircleFill></BsArrowLeftCircleFill>
         </button>
-        <button onClick={nextSlide} className="text-white text-[50px]">
+        <button onClick={nextSlide} className="text-white text-4xl ">
           <BsArrowRightCircleFill></BsArrowRightCircleFill>
         </button>
       </div>
