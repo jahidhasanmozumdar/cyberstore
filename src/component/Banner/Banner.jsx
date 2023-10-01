@@ -45,7 +45,7 @@ const Banner = () => {
   }, [currentSlide]);
 
   return (
-    <div className="max-h-[320px] max-w-[300px] sm:max-h-[320px] sm:max-w-[300px] md:max-h-[500px] md:max-w-[768px] bg-[#F4F4F4] lg:min-w-[1300px] lg:max-w-[1300px] mx-auto flex flex-col ">
+    <div className="max-h-[320px] max-w-[300px] sm:max-h-[320px] sm:max-w-[300px] md:max-h-[500px] md:max-w-[768px] bg-[#F4F4F4] lg:min-w-[1300px] lg:max-w-[1300px] mx-auto flex flex-col mt-[50px] ">
       <div className=" flex flex-col justify-center items-center md:gap-[100px] px-[20px] py-[10px]">
         <div className="flex flex-col items-center justify-center gap-[10px]">
           <p className="text-xl sm:text-xl md:text-[46px] lg:text-6xl">
