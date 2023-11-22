@@ -36,7 +36,7 @@ const FeaturedProduct = () => {
         {error ? (
           <p>Error Massage:{error.message}</p>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {data.map((user) => (
               <FeaturedProductCard
                 key={user._id}
