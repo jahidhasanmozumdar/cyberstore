@@ -1,6 +1,8 @@
+// Import necessary dependencies
 import { useState, useEffect } from "react";
 import { BsArrowLeftCircleFill, BsArrowRightCircleFill } from "react-icons/bs";
 
+// Banner component
 const Banner = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -29,13 +31,12 @@ const Banner = () => {
     setCurrentSlide((currentSlide + 1) % images.length);
   };
 
-  // Function to go to the previous slide
   const prevSlide = () => {
     setCurrentSlide((currentSlide - 1 + images.length) % images.length);
   };
 
-  // Automatically advance to the next slide every 5 seconds
   useEffect(() => {
+    // Auto-advance to the next slide every 5 seconds
     const interval = setInterval(() => {
       nextSlide();
     }, 5000); // 5000 milliseconds (5 seconds)
@@ -45,8 +46,9 @@ const Banner = () => {
   }, [currentSlide]);
 
   return (
-    <div className="max-h-[320px] max-w-[300px] sm:max-h-[320px] sm:max-w-[300px] md:max-h-[500px] md:max-w-[768px] bg-[#F4F4F4] lg:min-w-[1300px] lg:max-w-[1300px] mx-auto flex flex-col mt-[50px] ">
-      <div className=" flex flex-col justify-center items-center md:gap-[100px] px-[20px] py-[10px]">
+    <div className="max-h-[320px] max-w-[300px] sm:max-h-[320px] sm:max-w-[300px] md:max-h-[500px] md:max-w-[768px] bg-[#F4F4F4] lg:min-w-[1300px] lg:max-w-[1300px] mx-auto flex flex-col mt-[50px] relative">
+      {/* Content */}
+      <div className="flex flex-col items-center justify-center gap-[10px] px-[20px] py-[10px] md:gap-[100px]">
         <div className="flex flex-col items-center justify-center gap-[10px]">
           <p className="text-xl sm:text-xl md:text-[46px] lg:text-6xl">
             {images[currentSlide].caption}
@@ -55,7 +57,7 @@ const Banner = () => {
             {images[currentSlide].description}
           </p>
         </div>
-        <div className=" min-w-[24px] min-h-[83px] sm:max-w-[24px] sm:max-h-[83px] md:max-w-[845px] md:max-h-[219px] lg:w-[1138px] lg:h-[347px] overflow-hidden">
+        <div className="min-w-[24px] min-h-[83px] sm:max-w-[24px] sm:max-h-[83px] md:max-w-[845px] md:max-h-[219px] lg:w-[1138px] lg:h-[347px] overflow-hidden">
           <img
             src={images[currentSlide].src}
             alt={`Slide ${currentSlide + 1}`}
@@ -63,11 +65,13 @@ const Banner = () => {
           />
         </div>
       </div>
-      <div className="hidden xl:flex justify-around px-[10px]">
-        <button onClick={prevSlide} className="text-white text-4xl ">
+
+      {/* Previous and Next Buttons */}
+      <div className="hidden xl:flex justify-between absolute inset-y-1/2 -translate-y-1/2 transform left-0 right-0 px-2">
+        <button onClick={prevSlide} className="text-white text-4xl">
           <BsArrowLeftCircleFill />
         </button>
-        <button onClick={nextSlide} className="text-white text-4xl ">
+        <button onClick={nextSlide} className="text-white text-4xl">
           <BsArrowRightCircleFill />
         </button>
       </div>
