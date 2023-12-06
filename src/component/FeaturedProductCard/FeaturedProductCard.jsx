@@ -2,14 +2,14 @@ import { BiCartAdd, BiSolidStar, BiStar } from "react-icons/bi";
 import { BsHeart } from "react-icons/bs";
 
 const FeaturedProductCard = ({ user }) => {
-  const { name, image_url, price } = user;
+  const { name, image_url, price, category } = user;
   console.log(user);
 
   return (
     <div className="">
       <div className="min-h-[417px] max-h-[417px] min-w-[310px] max-w-[310px] border border-sky-500 px-[5px]">
         <div className="flex justify-between items-center ">
-          <p>Laptop & Tablet</p>
+          <p>{category}</p>
           <p>
             <BsHeart></BsHeart>
           </p>
