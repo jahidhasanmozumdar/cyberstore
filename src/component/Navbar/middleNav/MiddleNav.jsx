@@ -1,4 +1,5 @@
 import { BiCartAdd, BiHeart, BiSearch } from "react-icons/bi";
+import { Link } from "react-router-dom";
 
 const MiddleNav = () => {
   return (
@@ -35,13 +36,13 @@ const MiddleNav = () => {
           />
           <BiSearch className="text-[40px]"></BiSearch>
         </div>
-        <div className="flex gap-[10px]">
+        <div className="flex gap-[10px] cursor-pointer">
           <p>
             <BiHeart className="text-[34px]"></BiHeart>
           </p>
-          <p className="flex justify-center items-center">
+          <Link to="/cart" className="flex justify-center items-center">
             <BiCartAdd className="text-[34px]"></BiCartAdd>($0)
-          </p>
+          </Link>
         </div>
       </div>
       <button className="lg:hidden btn btn-square btn-ghost">

@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const EndNav = () => {
   return (
     <nav>
@@ -5,32 +7,16 @@ const EndNav = () => {
         <div className="hidden xl:flex justify-between items-center  text-[14px] lg:min-w-[1100px] lg:max-w-[1100px] mx-auto">
           <div className="flex gap-[21px]">
             <ul>
-              <a href="#">
-                <span>
-                  <span>Home</span>
-                </span>
-              </a>
+              <Link to="/">Home</Link>
             </ul>
             <ul>
-              <a href="#">
-                <span>
-                  <span>Shop</span>
-                </span>
-              </a>
+              <Link to="/shop">Shop</Link>
             </ul>
             <ul>
-              <a href="#">
-                <span>
-                  <span>Blog</span>
-                </span>
-              </a>
+              <Link to="/blog">Blog</Link>
             </ul>
             <ul>
-              <a href="#">
-                <span>
-                  <span>About Us</span>
-                </span>
-              </a>
+              <Link to="/about">About Us</Link>
             </ul>
           </div>
           <div className="flex gap-[21px]">

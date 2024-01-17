@@ -1,26 +1,19 @@
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import Banner from "./component/Banner/Banner";
-import Benefits from "./component/Benefites/Benefits";
-import EcommerceBanner from "./component/EcommerceBanner/EcommerceBanner";
-import FeaturedProduct from "./component/FeaturedProduct/FeaturedProduct";
-import Footer from "./component/Footer/Footer";
-import TopNav from "./component/Navbar/TopNav/TopNav";
-import EndNav from "./component/Navbar/endNav/endNav";
-import MiddleNav from "./component/Navbar/middleNav/Middlenav";
-import ProductCategory from "./component/ProductCategory/ProductCategory";
+import TotalNav from "./component/Navbar/totalNav";
+import Home from "./component/Home/Home";
+import Blog from "./component/Blog/Blog";
+import Cart from "./component/Cart/Cart";
 
 function App() {
   return (
     <>
-      <TopNav></TopNav>
-      <MiddleNav></MiddleNav>
-      <EndNav></EndNav>
-      <Banner></Banner>
-      <Benefits></Benefits>
-      <FeaturedProduct></FeaturedProduct>
-      <EcommerceBanner></EcommerceBanner>
-      <ProductCategory></ProductCategory>
-      <Footer></Footer>
+      <TotalNav></TotalNav>
+      <Routes>
+        <Route path="/" element={<Home></Home>} />
+        <Route path="/blog" element={<Blog></Blog>} />
+        <Route path="/cart" element={<Cart></Cart>} />
+      </Routes>
     </>
   );
 }
