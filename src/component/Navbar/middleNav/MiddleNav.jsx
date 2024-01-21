@@ -1,7 +1,15 @@
 import { BiCartAdd, BiHeart, BiSearch } from "react-icons/bi";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const MiddleNav = () => {
+  const cart = useSelector((state) => state.cart);
+  const totalPrice = cart.reduce(
+    (total, item) => total + item.price * item.quantity,
+    0
+  );
+  const totalQuantity = cart.reduce((total, item) => total + item.quantity, 0);
+  console.log(totalQuantity);
   return (
     <div className="navbar h-[123px] lg:min-w-[1100px] lg:max-w-[1100px] mx-auto flex justify-between   items-center">
       <div>
@@ -41,7 +49,14 @@ const MiddleNav = () => {
             <BiHeart className="text-[34px]"></BiHeart>
           </p>
           <Link to="/cart" className="flex justify-center items-center">
-            <BiCartAdd className="text-[34px]"></BiCartAdd>($0)
+            <BiCartAdd className="text-[34px] relative">
+              {totalQuantity > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-500 text-black px-2 py-1 rounded-full">
+                  {totalQuantity}
+                </span>
+              )}
+            </BiCartAdd>
+            (${totalPrice.toFixed(2)})
           </Link>
         </div>
       </div>

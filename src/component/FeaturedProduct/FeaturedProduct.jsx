@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import FeaturedProductCard from "../FeaturedProductCard/FeaturedProductCard";
+import { useSelector } from "react-redux";
 
 const FeaturedProduct = () => {
   const [data, setData] = useState([]);
@@ -20,6 +21,8 @@ const FeaturedProduct = () => {
         setError(error);
       });
   }, []);
+  const state = useSelector((state) => state);
+  console.log(state);
   return (
     <div className="max-w-[1300px] mx-auto mt-[40px] flex flex-col justify-center items-center">
       <div className="flex flex-col justify-center items-center min-h-[221px] max-h-[221px]">

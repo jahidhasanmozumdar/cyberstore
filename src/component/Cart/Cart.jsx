@@ -2,48 +2,113 @@ import React from "react";
 import "./custom.css";
 import { BiLeftArrowCircle, BiPlus, BiMinus } from "react-icons/bi";
 import { MdDelete } from "react-icons/md";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  decreaseQuantity,
+  increaseQuantity,
+  removeToCart,
+} from "../../Redux/actionCreator/actionCreator";
+import { Link } from "react-router-dom";
+
 const Cart = () => {
+  const cart = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
+
+  const calculateSubtotal = (cart) => {
+    return cart
+      .reduce((total, item) => total + item.price * item.quantity, 0)
+      .toFixed(2);
+  };
+
   return (
-    <div className="max-w-[1300px] mx-auto mt-[50px] bg-zinc-200 h-[70vh]">
-      <div>
-        <div className="ml-[10px]">
-          <p className="flex text-center">
-            <span className="text-[25px]">
-              <BiLeftArrowCircle />
-            </span>
-            <span className="text-[18px]">Continue Shopping</span>
-          </p>
-        </div>
-        <div className="max-w-[900px] mx-auto flex justify-between mt-[50px]">
-          <div>
-            <div className="flex justify-between gap-[300px]">
-              <p className="text-[18px]">Shopping cart</p>
-              <p className="text-[18px]">sort by:price</p>
-            </div>
-            <p className="horizontal-line"></p>
-            <div className="flex justify-around items-center gap-[20px]  mt-[20px] bg-white shadow-md rounded-md">
-              <div className="h-[50px] w-[50px]">
-                <img
-                  src="https://adminapi.applegadgetsbd.com/storage/media/large/2238-32796.jpg"
-                  alt=""
-                />
-              </div>
-              <div>
-                <h4>One plus 7 pro</h4>
-              </div>
-              <div className="flex items-center gap-[8px]">
-                <BiPlus className="text-[20px]" />
-                <p>1</p>
-                <BiMinus className="text-[20px]" />
-              </div>
-              <div className="flex items-center gap-[10px] ">
-                <p>$870</p>
-                <MdDelete className="text-[20px]" />
-              </div>
-            </div>
+    <div className="max-w-7xl mx-auto mt-8 bg-zinc-200 min-h-[70vh] shadow-xl rounded-md p-4 md:p-8">
+      <div className="md:flex justify-between">
+        <div className="md:w-2/3 pr-4">
+          <div className="mb-4">
+            <Link
+              to="/"
+              className="flex items-center text-[18px] text-blue-500 hover:text-blue-700"
+            >
+              <BiLeftArrowCircle className="text-[25px]" />
+              <span className="ml-2">Continue Shopping</span>
+            </Link>
           </div>
           <div>
-            <h1>Cart details</h1>
+            <div className="flex justify-between items-center mb-4 md:mb-6">
+              <p className="text-lg md:text-xl font-semibold">Shopping cart</p>
+              <p className="text-lg md:text-xl">Sort by: price</p>
+            </div>
+            <hr className="mb-4 md:mb-6" />
+            {cart.map((item, index) => (
+              <div
+                key={index}
+                className="flex flex-col md:flex-row justify-between items-center bg-white shadow-md rounded-md mb-4 md:mb-6"
+              >
+                <div className="h-[50px] w-[50px] flex justify-center items-center">
+                  <img src={item.image_url} alt={item.name} />
+                </div>
+                <div>
+                  <h4>{item.name}</h4>
+                </div>
+                <div className="flex items-center gap-2 md:gap-8">
+                  <button>
+                    <BiPlus
+                      onClick={() => dispatch(increaseQuantity(item))}
+                      className="text-[20px]"
+                    />
+                  </button>
+                  <p>{item.quantity}</p>
+                  <button>
+                    <BiMinus
+                      onClick={() => dispatch(decreaseQuantity(item))}
+                      className="text-[20px]"
+                    />
+                  </button>
+                </div>
+                <div className="flex items-center gap-2 md:gap-10">
+                  <p>${item.price * item.quantity}</p>
+                  <MdDelete
+                    onClick={() => dispatch(removeToCart(item))}
+                    className="text-[20px]"
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="md:w-1/3 mt-4 md:mt-0">
+          <div className="bg-white rounded-md shadow-md p-4 md:p-6">
+            <h2 className="text-xl md:text-2xl font-bold mb-4">
+              Order Summary
+            </h2>
+
+            {/* Cart Items List */}
+            {/* Add your cart items here */}
+
+            {/* Subtotal */}
+            <div className="flex justify-between items-center border-b border-gray-300 py-2">
+              <span className="text-gray-600">Subtotal</span>
+              <span className="font-bold">${calculateSubtotal(cart)}</span>
+            </div>
+
+            {/* Shipping */}
+            <div className="flex justify-between items-center border-b border-gray-300 py-2">
+              <span className="text-gray-600">Shipping</span>
+              <span className="font-bold">$50.00</span>
+            </div>
+
+            {/* Total */}
+            <div className="flex justify-between items-center border-b border-gray-300 py-2">
+              <span className="text-gray-600">Total</span>
+              <span className="font-bold text-green-600">
+                ${parseFloat(calculateSubtotal(cart)) + 50.0}
+              </span>
+            </div>
+
+            {/* Checkout Button */}
+            <button className="bg-green-500 text-white rounded-md py-2 mt-4 w-full">
+              Checkout
+            </button>
           </div>
         </div>
       </div>
