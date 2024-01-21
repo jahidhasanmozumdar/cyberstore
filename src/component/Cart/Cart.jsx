@@ -34,15 +34,14 @@ const Cart = () => {
             </Link>
           </div>
           <div>
-            <div className="flex justify-between items-center mb-4 md:mb-6">
+            <div className="flex justify-between items-center mb-4 md:mb-6 border-b border-gray-500">
               <p className="text-lg md:text-xl font-semibold">Shopping cart</p>
               <p className="text-lg md:text-xl">Sort by: price</p>
             </div>
-            <hr className="mb-4 md:mb-6" />
             {cart.map((item, index) => (
               <div
                 key={index}
-                className="flex flex-col md:flex-row justify-between items-center bg-white shadow-md rounded-md mb-4 md:mb-6"
+                className="flex flex-col md:flex-row justify-around items-center bg-white shadow-md rounded-md mb-4 md:mb-6"
               >
                 <div className="h-[50px] w-[50px] flex justify-center items-center">
                   <img src={item.image_url} alt={item.name} />
@@ -65,11 +64,11 @@ const Cart = () => {
                     />
                   </button>
                 </div>
-                <div className="flex items-center gap-2 md:gap-10">
+                <div className="flex items-center gap-20 md:gap-10">
                   <p>${item.price * item.quantity}</p>
                   <MdDelete
                     onClick={() => dispatch(removeToCart(item))}
-                    className="text-[20px]"
+                    className="text-[20px] text-red-600"
                   />
                 </div>
               </div>
@@ -77,7 +76,7 @@ const Cart = () => {
           </div>
         </div>
         <div className="md:w-1/3 mt-4 md:mt-0">
-          <div className="bg-white rounded-md shadow-md p-4 md:p-6">
+          <div className="bg-white rounded-md shadow-md p-4 md:p-6 mt-20">
             <h2 className="text-xl md:text-2xl font-bold mb-4">
               Order Summary
             </h2>
