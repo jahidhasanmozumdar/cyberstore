@@ -1,4 +1,3 @@
-import React from "react";
 import "./custom.css";
 import { BiLeftArrowCircle, BiPlus, BiMinus } from "react-icons/bi";
 import { MdDelete } from "react-icons/md";
@@ -9,16 +8,23 @@ import {
   removeToCart,
 } from "../../Redux/actionCreator/actionCreator";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 const Cart = () => {
-  const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
+  const state = useSelector((state) => state.cart);
 
   const calculateSubtotal = (cart) => {
     return cart
-      .reduce((total, item) => total + item.price * item.quantity, 0)
-      .toFixed(2);
+      ?.reduce((total, item) => total + item.price * item.quantity, 0)
+      ?.toFixed(2);
   };
+  let cartData = JSON.parse(localStorage.getItem("bookingCart"));
+  console.log("cartData", cartData);
+
+  useEffect(() => {
+    calculateSubtotal(cartData);
+  }, [state]);
 
   return (
     <div className="max-w-7xl mx-auto mt-8 bg-zinc-200 min-h-[70vh] shadow-xl rounded-md p-4 md:p-8">
@@ -38,7 +44,7 @@ const Cart = () => {
               <p className="text-lg md:text-xl font-semibold">Shopping cart</p>
               <p className="text-lg md:text-xl">Sort by: price</p>
             </div>
-            {cart.map((item, index) => (
+            {cartData?.map((item, index) => (
               <div
                 key={index}
                 className="flex flex-col md:flex-row justify-around items-center bg-white shadow-md rounded-md mb-4 md:mb-6"
@@ -87,7 +93,7 @@ const Cart = () => {
             {/* Subtotal */}
             <div className="flex justify-between items-center border-b border-gray-300 py-2">
               <span className="text-gray-600">Subtotal</span>
-              <span className="font-bold">${calculateSubtotal(cart)}</span>
+              <span className="font-bold">${calculateSubtotal(cartData)}</span>
             </div>
 
             {/* Shipping */}
@@ -100,14 +106,16 @@ const Cart = () => {
             <div className="flex justify-between items-center border-b border-gray-300 py-2">
               <span className="text-gray-600">Total</span>
               <span className="font-bold text-green-600">
-                ${parseFloat(calculateSubtotal(cart)) + 50.0}
+                ${parseFloat(calculateSubtotal(cartData)) + 50.0}
               </span>
             </div>
 
             {/* Checkout Button */}
-            <button className="bg-green-500 text-white rounded-md py-2 mt-4 w-full">
-              Checkout
-            </button>
+            <Link to="/Checkout">
+              <button className="bg-green-500 text-white rounded-md py-2 mt-4 w-full">
+                Checkout
+              </button>
+            </Link>
           </div>
         </div>
       </div>

@@ -5,6 +5,7 @@ import EcommerceBanner from "../EcommerceBanner/EcommerceBanner";
 import FeaturedProduct from "../FeaturedProduct/FeaturedProduct";
 import Footer from "../Footer/Footer";
 import ProductCategory from "../ProductCategory/ProductCategory";
+import BrandSection from "../BrandSection/BrandSection";
 
 const Home = () => {
   return (
@@ -14,6 +15,7 @@ const Home = () => {
       <FeaturedProduct></FeaturedProduct>
       <EcommerceBanner></EcommerceBanner>
       <ProductCategory></ProductCategory>
+      <BrandSection />
       <Footer></Footer>
     </>
   );

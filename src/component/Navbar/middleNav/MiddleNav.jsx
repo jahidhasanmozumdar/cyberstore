@@ -1,15 +1,27 @@
+import { useEffect, useState } from "react";
 import { BiCartAdd, BiHeart, BiSearch } from "react-icons/bi";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const MiddleNav = () => {
-  const cart = useSelector((state) => state.cart);
-  const totalPrice = cart.reduce(
+  const state = useSelector((state) => state.cart);
+  const [cart, setCart] = useState([]);
+  const totalPrice = cart?.reduce(
     (total, item) => total + item.price * item.quantity,
     0
   );
-  const totalQuantity = cart.reduce((total, item) => total + item.quantity, 0);
-  console.log(totalQuantity);
+  const totalQuantity = cart?.reduce((total, item) => total + item.quantity, 0);
+
+  useEffect(() => {
+    let cartData = JSON.parse(localStorage.getItem("bookingCart"));
+    // Ensure cartData is an array before setting it
+    if (Array.isArray(cartData)) {
+      setCart(cartData);
+    } else {
+      setCart([]); // Set to an empty array if cartData is not an array
+    }
+  }, [state]);
+
   return (
     <div className="navbar h-[123px] lg:min-w-[1100px] lg:max-w-[1100px] mx-auto flex justify-between   items-center">
       <div>
@@ -56,7 +68,7 @@ const MiddleNav = () => {
                 </span>
               )}
             </BiCartAdd>
-            (${totalPrice.toFixed(2)})
+            (${totalPrice?.toFixed(2)})
           </Link>
         </div>
       </div>
