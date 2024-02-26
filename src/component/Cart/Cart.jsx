@@ -15,17 +15,21 @@ const Cart = () => {
   const state = useSelector((state) => state.cart);
 
   const calculateSubtotal = (cart) => {
-    return cart
-      ?.reduce((total, item) => total + item.price * item.quantity, 0)
+    let shippingCharge = 50;
+    return cart.cart
+      ?.reduce(
+        (total, item) => total + shippingCharge + item.price * item.quantity,
+        0
+      )
       ?.toFixed(2);
   };
-  let cartData = JSON.parse(localStorage.getItem("bookingCart"));
-  console.log("cartData", cartData);
 
+  let cartData = JSON.parse(localStorage.getItem("bookingCart"));
   useEffect(() => {
     calculateSubtotal(cartData);
   }, [state]);
 
+  const subtotal = calculateSubtotal(cartData);
   return (
     <div className="max-w-7xl mx-auto mt-8 bg-zinc-200 min-h-[70vh] shadow-xl rounded-md p-4 md:p-8">
       <div className="md:flex justify-between">
@@ -44,7 +48,7 @@ const Cart = () => {
               <p className="text-lg md:text-xl font-semibold">Shopping cart</p>
               <p className="text-lg md:text-xl">Sort by: price</p>
             </div>
-            {cartData?.map((item, index) => (
+            {cartData?.cart?.map((item, index) => (
               <div
                 key={index}
                 className="flex flex-col md:flex-row justify-around items-center bg-white shadow-md rounded-md mb-4 md:mb-6"
@@ -106,12 +110,12 @@ const Cart = () => {
             <div className="flex justify-between items-center border-b border-gray-300 py-2">
               <span className="text-gray-600">Total</span>
               <span className="font-bold text-green-600">
-                ${parseFloat(calculateSubtotal(cartData)) + 50.0}
+                ${parseFloat(calculateSubtotal(cartData))}
               </span>
             </div>
 
             {/* Checkout Button */}
-            <Link to="/Checkout">
+            <Link to={`/Checkout?subtotal=${subtotal}`}>
               <button className="bg-green-500 text-white rounded-md py-2 mt-4 w-full">
                 Checkout
               </button>

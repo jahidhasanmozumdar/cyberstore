@@ -6,7 +6,7 @@ const FeaturedProduct = () => {
   const [error, setError] = useState(null);
   useEffect(() => {
     // Fetch data when the component mounts
-    fetch("http://localhost:5001/api/product")
+    fetch("https://cyberstore-serverside.vercel.app/api/product")
       .then((response) => {
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
@@ -20,7 +20,7 @@ const FeaturedProduct = () => {
         setError(error);
       });
   }, []);
- 
+
   return (
     <div className="max-w-[1300px] mx-auto mt-[40px] flex flex-col justify-center items-center">
       <div className="flex flex-col justify-center items-center min-h-[221px] max-h-[221px]">

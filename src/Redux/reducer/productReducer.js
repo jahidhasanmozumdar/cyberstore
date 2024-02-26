@@ -31,9 +31,8 @@ function setLocalStorageData(item) {
 const productReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_TO_CART: {
-      console.log("Adding to cart:", action.payload.id);
       const existingPayloadData = getCartDataFromLocalStorage();
-      console.log("existingPayloadData", existingPayloadData);
+
       const existingProduct = existingPayloadData?.cart?.find(
         (product) => product._id === action.payload._id
       );
@@ -50,16 +49,18 @@ const productReducer = (state = initialState, action) => {
           ...state,
           cart: updatedCart,
         });
-        console.log("Updated Cart:", updatedCart);
+
         return {
           ...state,
           cart: updatedCart,
         };
       } else {
         // If the product is not in the cart, add it with quantity 1
-        let storeData = [...state.cart, { ...action.payload, quantity: 1 }];
+        let storeData = {
+          cart: [...state.cart, { ...action.payload, quantity: 1 }],
+        };
         setLocalStorageData(storeData);
-        console.log("storeData:", storeData);
+
         return {
           ...state,
           cart: [...state.cart, { ...action.payload, quantity: 1 }],
@@ -69,23 +70,28 @@ const productReducer = (state = initialState, action) => {
 
     case REMOVE_TO_CART: {
       const existingPayloadData = getCartDataFromLocalStorage();
-      let removeData = existingPayloadData?.filter(
+
+      if (!existingPayloadData || !existingPayloadData.cart) {
+        // Handle the case where existingPayloadData or existingPayloadData.cart is null or undefined
+        return state;
+      }
+
+      const updatedCart = existingPayloadData.cart.filter(
         (product) => product._id !== action.payload._id
       );
-      setLocalStorageData(removeData);
+
+      setLocalStorageData({ ...state, cart: updatedCart });
 
       return {
         ...state,
-        cart: existingPayloadData?.filter(
-          (product) => product._id !== action.payload._id
-        ),
+        cart: updatedCart,
       };
     }
 
     case INCREASE_QUANTITY: {
       const existingPayloadData = getCartDataFromLocalStorage();
-      console.log(existingPayloadData);
-      return {
+      console.log(action.payload, existingPayloadData);
+      let updateData = {
         ...state,
         cart: existingPayloadData?.cart?.map((item) =>
           item._id === action.payload._id
@@ -93,16 +99,33 @@ const productReducer = (state = initialState, action) => {
             : item
         ),
       };
-    }
-    case DECREASE_QUANTITY:
+
+      setLocalStorageData(updateData);
       return {
         ...state,
-        cart: state?.cart?.map((item) =>
-          item._id === action.payload._id && item.quantity > 1
-            ? { ...item, quantity: item.quantity - 1 }
-            : item
-        ),
+        cart: updateData,
       };
+    }
+    case DECREASE_QUANTITY: {
+      const existingPayloadData = getCartDataFromLocalStorage();
+      console.log(action.payload, existingPayloadData);
+
+      // Find the item in the cart
+      const updatedCart = existingPayloadData.cart.map((item) =>
+        item._id === action.payload._id
+          ? { ...item, quantity: Math.max(item.quantity - 1, 0) } // Ensure quantity doesn't go below 0
+          : item
+      );
+
+      // Update local storage and state
+      setLocalStorageData({ ...state, cart: updatedCart });
+
+      return {
+        ...state,
+        cart: updatedCart,
+      };
+    }
+
     default:
       return state;
   }

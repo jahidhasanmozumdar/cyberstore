@@ -1,16 +1,23 @@
 // ProductDetails.js
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
+import { addToCart } from "../../Redux/actionCreator/actionCreator";
 
 const ProductDetails = () => {
   const { productId } = useParams();
+  console.log(productId);
   const [productDetails, setProductDetails] = useState([]);
+  console.log(productDetails);
   const [similarData, setSimilarData] = useState([]);
   console.log(similarData);
-  console.log(productDetails);
+  const dispatch = useDispatch();
+  const cartStorage = (cart) => {
+    dispatch(addToCart(cart));
+  };
 
   useEffect(() => {
-    fetch("http://localhost:5001/api/product")
+    fetch("https://cyberstore-serverside.vercel.app/api/product")
       .then((response) => {
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
@@ -59,7 +66,10 @@ const ProductDetails = () => {
                   <span className="text-gray-700 font-semibold mr-2">Sku:</span>
                   <span className="text-gray-900 ">{details.sku}</span>
                 </div>
-                <button className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                <button
+                  onClick={() => cartStorage(details)}
+                  className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                >
                   Add to Cart
                 </button>
               </div>

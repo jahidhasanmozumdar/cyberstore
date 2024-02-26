@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { BiCartAdd } from "react-icons/bi";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../Redux/actionCreator/actionCreator";
+import { Link } from "react-router-dom";
 
 const categories = ["All Products", "Android", "iPhone"];
 
@@ -58,8 +59,16 @@ const ProductList = ({ products }) => {
                 />
               </div>
               <button onClick={() => dispatch(addToCart(product))}>
-                <BiCartAdd className="min-h-[43px] max-h-[43px] min-w-[43px] max-w-[43px] border rounded-full p-[5px] cursor-pointer "></BiCartAdd>
+                <BiCartAdd className="min-h-[43px] max-h-[43px] min-w-[43px] max-w-[43px] border rounded-full p-[5px] cursor-pointer hover:bg-lime-400 "></BiCartAdd>
               </button>
+            </div>
+            <div className="flex justify-center items-center mt-2">
+              <Link
+                to={`/product/${product._id}`}
+                className="product-link border px-[20px] hover:bg-lime-500"
+              >
+                View Details
+              </Link>
             </div>
           </div>
         </div>
@@ -72,10 +81,9 @@ const ProductCategory = () => {
   const [selectedCategory, setSelectedCategory] = useState("All Products");
   const [productsData, setProductData] = useState([]);
   const [error, setError] = useState(null);
-
   useEffect(() => {
     // Fetch data when the component mounts
-    fetch("http://localhost:5001/api/allProduct")
+    fetch("https://cyberstore-serverside.vercel.app/api/allProduct")
       .then((response) => {
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);

@@ -6,20 +6,20 @@ import { Link } from "react-router-dom";
 const MiddleNav = () => {
   const state = useSelector((state) => state.cart);
   const [cart, setCart] = useState([]);
-  const totalPrice = cart?.reduce(
+
+  const totalPrice = cart.cart?.reduce(
     (total, item) => total + item.price * item.quantity,
     0
   );
-  const totalQuantity = cart?.reduce((total, item) => total + item.quantity, 0);
+  const totalQuantity = cart.cart?.reduce(
+    (total, item) => total + item.quantity,
+    0
+  );
 
   useEffect(() => {
     let cartData = JSON.parse(localStorage.getItem("bookingCart"));
     // Ensure cartData is an array before setting it
-    if (Array.isArray(cartData)) {
-      setCart(cartData);
-    } else {
-      setCart([]); // Set to an empty array if cartData is not an array
-    }
+    setCart(cartData);
   }, [state]);
 
   return (
