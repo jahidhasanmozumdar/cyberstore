@@ -1,1 +1,5 @@
-{}
+{
+  "projects": {
+    "default": "cyberstore-caf7c"
+  }
+}
