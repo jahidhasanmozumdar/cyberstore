@@ -72,21 +72,54 @@ const MiddleNav = () => {
           </Link>
         </div>
       </div>
-      <button className="lg:hidden btn btn-square btn-ghost">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          className="inline-block w-5 h-5 stroke-current"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M4 6h16M4 12h8m-8 6h16"
-          ></path>
-        </svg>
-      </button>
+      <div className=" drawer-start">
+        <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
+        <div className="drawer-content">
+          <label
+            htmlFor="my-drawer-4"
+            className="lg:hidden btn btn-square btn-ghost"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              className="inline-block w-5 h-5 stroke-current"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M4 6h16M4 12h8m-8 6h16"
+              ></path>
+            </svg>
+          </label>
+        </div>
+        <div className="drawer-side w-40">
+          <label
+            htmlFor="my-drawer-4"
+            aria-label="close sidebar"
+            className="drawer-overlay"
+          ></label>
+          <ul className="menu p-4 w-80 min-h-full bg-transparent text-base-content">
+            {/* Sidebar content here */}
+            <div className="flex gap-[10px] cursor-pointer  items-center ">
+              <Link
+                to="/cart"
+                className="flex justify-center items-center border border-amber-700 px-3"
+              >
+                <BiCartAdd className="text-[34px] relative">
+                  {totalQuantity > 0 && (
+                    <span className="absolute -top-2 -right-2 bg-red-500 text-black px-2 py-1 rounded-full">
+                      {totalQuantity}
+                    </span>
+                  )}
+                </BiCartAdd>
+                (${totalPrice?.toFixed(2)})
+              </Link>
+            </div>
+          </ul>
+        </div>
+      </div>
     </div>
   );
 };
