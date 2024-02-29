@@ -16,7 +16,7 @@ const Cart = () => {
 
   const calculateSubtotal = (cart) => {
     let shippingCharge = 50;
-    return cart.cart
+    return cart?.cart
       ?.reduce(
         (total, item) => total + shippingCharge + item.price * item.quantity,
         0

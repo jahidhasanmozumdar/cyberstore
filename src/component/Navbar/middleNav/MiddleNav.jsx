@@ -7,11 +7,11 @@ const MiddleNav = () => {
   const state = useSelector((state) => state.cart);
   const [cart, setCart] = useState([]);
 
-  const totalPrice = cart.cart?.reduce(
+  const totalPrice = cart?.cart?.reduce(
     (total, item) => total + item.price * item.quantity,
     0
   );
-  const totalQuantity = cart.cart?.reduce(
+  const totalQuantity = cart?.cart?.reduce(
     (total, item) => total + item.quantity,
     0
   );
