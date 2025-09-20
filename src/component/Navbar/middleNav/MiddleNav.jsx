@@ -72,6 +72,14 @@ const MiddleNav = () => {
           </Link>
         </div>
       </div>
+        {/* Navigation Links */}
+        {/* <nav className="flex gap-6 items-center">
+          <Link to="/" className="hover:text-blue-500">Home</Link>
+          <Link to="/shop" className="hover:text-blue-500">Shop</Link>
+          <Link to="/about" className="hover:text-blue-500">About</Link>
+          <Link to="/blog" className="hover:text-blue-500">Blog</Link>
+          <Link to="/cart" className="hover:text-blue-500">Cart</Link>
+        </nav> */}
       <div className=" drawer-start">
         <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content">

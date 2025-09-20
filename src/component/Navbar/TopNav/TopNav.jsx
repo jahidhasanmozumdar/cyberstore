@@ -1,6 +1,9 @@
 import { BiSolidLocationPlus } from "react-icons/bi";
 // import { MdOutlineSpeed } from "react-icons/md";
 // import { CgProfile } from "react-icons/cg";
+import { Link } from "react-router-dom";
+import { getAuth } from "firebase/auth";
+import "../../firebase/firebase.init";
 
 const TopNav = () => {
   return (
@@ -22,10 +25,24 @@ const TopNav = () => {
               {/* <MdOutlineSpeed></MdOutlineSpeed> */}
               TRACK YOUR ORDER
             </button>
-            <button className="flex justify-center items-center gap-[2px]">
-              {/* <CgProfile></CgProfile> */}
-              MY ACCOUNT
-            </button>
+            {(() => {
+              const auth = getAuth();
+              const user = auth.currentUser;
+              if (user) {
+                return (
+                  <Link to="/profile" className="flex justify-center items-center gap-[2px]">
+                    {/* <CgProfile></CgProfile> */}
+                    MY ACCOUNT
+                  </Link>
+                );
+              } else {
+                return (
+                  <Link to="/signup" className="flex justify-center items-center gap-[2px]">
+                    SIGN UP
+                  </Link>
+                );
+              }
+            })()}
           </div>
         </div>
       </div>

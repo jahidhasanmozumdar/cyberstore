@@ -108,6 +108,31 @@ const CheckoutForm = () => {
               required
             />
           </div>
+          <div className="mb-4">
+            <label htmlFor="address" className="block mb-2 text-gray-800">Shipping Address</label>
+            <input
+              type="text"
+              id="address"
+              className="border border-gray-300 rounded-md p-2 w-full"
+              placeholder="Street, City, State, Zip"
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <h3 className="text-lg font-semibold mb-2">Order Summary</h3>
+            <div className="flex justify-between mb-1">
+              <span>Subtotal:</span>
+              <span>${subtotal}</span>
+            </div>
+            <div className="flex justify-between mb-1">
+              <span>Shipping:</span>
+              <span>$50.00</span>
+            </div>
+            <div className="flex justify-between font-bold">
+              <span>Total:</span>
+              <span>${subtotal ? (parseFloat(subtotal) + 50).toFixed(2) : "0.00"}</span>
+            </div>
+          </div>
           <label htmlFor="cardNumber" className="block mb-2 text-gray-800">
             Card Number
           </label>
